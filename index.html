@@ -439,6 +439,67 @@ a.t-what svg { color: var(--teal); font-size: 16px; }
 .leaflet-tooltip.m-st::before { display: none; }
 
 /* ---------- 항공편 ---------- */
+/* ---------- 면세절차 ---------- */
+.pack-btn .ico.tf-ico { background: #b4470e; }
+.tf-sum { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 16px; }
+.tf-sum > div { background: #12302d; color: #fff; border-radius: 16px; padding: 12px 10px; display: grid; gap: 4px; align-content: start; }
+.tf-sum b { font-family: var(--brand); font-size: 23px; white-space: nowrap; font-weight: 700; line-height: 1; color: #ffd23f; }
+.tf-sum span { font-size: 13px; font-weight: 700; line-height: 1.35; }
+.tf-sec { border-radius: 22px; overflow: hidden; background: var(--surface); box-shadow: var(--shadow); margin-top: 14px; --k: #136a62; }
+.tf-sec > h3 { margin: 0; display: flex; align-items: center; gap: 8px; padding: 13px 16px; background: var(--k); color: #fff; font-size: 19px; font-weight: 800; letter-spacing: -0.03em; }
+.tf-sec > h3 small { margin-left: auto; font-size: 13px; font-weight: 800; background: rgba(255,255,255,.22); padding: 3px 10px; border-radius: 999px; }
+.tf-sec.shop { --k: #0b6a94; }
+.tf-sec.reg { --k: #8a5a00; }
+.tf-sec.air { --k: #5b3fc4; }
+.tf-sec.warn { --k: #b3261e; }
+.tf-body { padding: 14px 16px 16px; font-size: 16px; line-height: 1.6; }
+.tf-body p { margin: 0 0 10px; }
+.tf-body p:last-child { margin-bottom: 0; }
+.tf-body strong { color: var(--k); }
+.tf-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; counter-reset: tf; }
+.tf-steps > li { counter-increment: tf; display: grid; grid-template-columns: 34px 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); }
+.tf-steps > li:first-child { border-top: 0; padding-top: 2px; }
+.tf-steps > li::before { content: counter(tf); width: 34px; height: 34px; border-radius: 50%; background: var(--k); color: #fff; display: grid; place-items: center; font-family: var(--brand); font-size: 18px; font-weight: 700; }
+.tf-steps b { display: block; font-size: 17px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.35; }
+.tf-steps li > div > span { display: block; font-size: 15px; color: var(--ink-soft); line-height: 1.5; margin-top: 2px; }
+.tf-steps .opt::before { background: #ffd23f; color: #3a2a00; }
+.tf-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 12px; }
+.tf-chips span { font-size: 15px; font-weight: 800; padding: 6px 12px; border-radius: 999px; background: #fff3cf; color: #5a3b00; border: 1.5px solid #f0c75e; }
+.tf-say { margin: 0; padding: 12px 14px; border-radius: 14px; background: var(--bg); font-size: 15px; line-height: 1.5; }
+.tf-say b { display: block; font-size: 17px; margin-bottom: 2px; }
+.tf-pay { display: grid; gap: 10px; margin-top: 14px; }
+.tf-pay article { border-radius: 22px; overflow: hidden; background: var(--surface); box-shadow: var(--shadow); --k: #1a5fb4; }
+.tf-pay article.cash { --k: #a14f00; }
+.tf-pay h3 { margin: 0; padding: 12px 16px; background: var(--k); color: #fff; font-size: 19px; font-weight: 800; letter-spacing: -0.03em; }
+.tf-pay dl { margin: 0; padding: 4px 16px 10px; }
+.tf-pay dl > div { display: grid; grid-template-columns: 72px 1fr; gap: 10px; padding: 9px 0; border-top: 1px solid var(--line); }
+.tf-pay dl > div:first-child { border-top: 0; }
+.tf-pay dt { font-size: 14px; font-weight: 800; color: var(--k); padding-top: 1px; }
+.tf-pay dd { margin: 0; font-size: 15.5px; line-height: 1.5; }
+.tf-gr { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+.tf-gr div { border-radius: 14px; padding: 10px 12px; font-size: 14px; line-height: 1.45; font-weight: 600; }
+.tf-gr b { display: block; font-size: 18px; font-weight: 800; letter-spacing: .02em; margin-bottom: 2px; }
+.tf-gr .g { background: #dff3e4; color: #0f4a22; }
+.tf-gr .r { background: #fde2e0; color: #7a1712; }
+.tf-map { position: relative; margin: 10px 0 2px -46px; border-radius: 14px; overflow: hidden; border: 1.5px solid var(--line); background: #fff; }
+.tf-map img { display: block; width: 100%; height: auto; }
+.tf-pin { position: absolute; transform: translate(-50%, -50%); width: 46px; height: 46px; border-radius: 50%; border: 4px solid #e8112d; box-shadow: 0 0 0 3px rgba(255,255,255,.9); animation: tf-ring 1.4s ease-in-out infinite; }
+@keyframes tf-ring { 0%,100% { transform: translate(-50%,-50%) scale(1); } 50% { transform: translate(-50%,-50%) scale(1.18); } }
+@media (prefers-reduced-motion: reduce) { .tf-pin { animation: none; } }
+.tf-lb { position: absolute; transform: translate(-50%, -50%); white-space: nowrap; font-size: 12.5px; font-weight: 800; line-height: 1.2; padding: 4px 8px; border-radius: 8px; background: #12302d; color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.3); }
+.tf-lb.hot { background: #e8112d; font-size: 14px; }
+.tf-cap { margin: 6px 0 0 -46px; font-size: 12.5px; color: var(--ink-soft); }
+.tf-warn { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.tf-warn li { display: grid; grid-template-columns: 26px 1fr; gap: 8px; font-size: 15.5px; line-height: 1.5; }
+.tf-warn li::before { content: "!"; width: 24px; height: 24px; border-radius: 50%; background: #b3261e; color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 15px; margin-top: 1px; }
+.tf-warn b { color: #b3261e; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tf-warn b { color: #ff8a80; } :root:not([data-theme="light"]) .tf-chips span { background: #3a2d0a; color: #ffe08a; border-color: #8a6a1a; } :root:not([data-theme="light"]) .tf-gr .g { background: #173b22; color: #c9f0d3; } :root:not([data-theme="light"]) .tf-gr .r { background: #4a1c19; color: #ffd2cd; } }
+:root[data-theme="dark"] .tf-warn b { color: #ff8a80; }
+:root[data-theme="dark"] .tf-chips span { background: #3a2d0a; color: #ffe08a; border-color: #8a6a1a; }
+:root[data-theme="dark"] .tf-gr .g { background: #173b22; color: #c9f0d3; }
+:root[data-theme="dark"] .tf-gr .r { background: #4a1c19; color: #ffd2cd; }
+@media (max-width: 360px) { .tf-sum b { font-size: 22px; } .tf-lb { font-size: 11px; } }
+
 .pack-btn .ico.fl-ico { background: #0f5f58; }
 .pack-btn .ico.fl-ico svg { fill: #fff; stroke: none; }
 .fl-cards { display: grid; gap: 14px; margin-top: 4px; }
@@ -987,6 +1048,7 @@ function home() {
       <nav class="board" aria-label="일정 꼭지">${tiles.join("")}</nav>
       ${flightButton()}
       ${mapButton()}
+      ${taxfreeButton()}
       ${packButton()}
       <p class="note">영업 표시는 후쿠오카 현재 시각 기준이에요. 휴무일은 지도에서 한 번 더 확인하세요.</p>
     </section>`;
@@ -1685,11 +1747,119 @@ function flightView() {
     </div>`;
 }
 
+// 면세절차 (2026.11.1 리펀드 방식)
+function taxfreeButton() {
+  return `<a class="pack-btn" href="#taxfree">
+      <span class="ico tf-ico">${ic("bag")}</span>
+      <span><b>면세절차 간단정리</b><span class="sub">세금 먼저 내고, 출국할 때 돌려받기</span></span>
+      <span class="go-ar">${ic("chev")}</span>
+    </a>`;
+}
+
+function taxfreeView() {
+  return `
+    <div class="gutter">
+      <div class="p-head"><a class="back" href="#">${ic("back")}목록</a><span class="pill-brand">Fukuoka Trip Advisor</span></div>
+      <h2 class="p-title">면세절차 간단정리</h2>
+      <p class="p-lede">2026년 11월 1일부터 일본 면세가 바뀌었어요. 가게에서는 세금까지 다 내고, 출국할 때 공항에서 확인받으면 세금을 돌려받아요.</p>
+
+      <div class="tf-sum">
+        <div><b>5,000엔</b><span>같은 가게, 같은 날 세금 빼고 이 금액 이상</span></div>
+        <div><b>90일</b><span>산 날부터 90일 안에 출국</span></div>
+        <div><b>체크인 전</b><span>짐 부치기 전에 공항 키오스크 확인</span></div>
+      </div>
+
+      <section class="tf-sec shop">
+        <h3>${ic("bag")}가게에서 <small>살 때</small></h3>
+        <div class="tf-body">
+          <ol class="tf-steps">
+            <li><div><b>여권 보여주고 "택스프리" 말하기</b><span>면세 가게(Tax-Free 표시)에서만 돼요.</span></div></li>
+            <li><div><b>세금 포함 금액 전부 결제</b><span>일반 물건 10%, 술 뺀 먹을거리 8% 세금이 붙은 값이에요.</span></div></li>
+            <li><div><b>환급수단 등록</b><span>세금을 어디로 돌려받을지 정하는 거예요. 아래에서 설명해요.</span></div></li>
+            <li><div><b>영수증, 물건 그대로 챙기기</b><span>공항에서 산 물건을 다 들고 있어야 해요.</span></div></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="tf-sec reg">
+        <h3>${ic("pen")}환급수단 등록이 뭐예요?</h3>
+        <div class="tf-body">
+          <p>계산할 때 <strong>"세금을 나중에 어디로 받을지"</strong> 가게에 알려주는 거예요. 직원이 대신 입력해 주거나, 영수증에 있는 QR 사이트에서 직접 입력해요.</p>
+          <div class="tf-chips"><span>신용카드</span><span>결제앱 (알리페이 등)</span><span>은행계좌</span><span>공항에서 현금</span></div>
+          <p class="tf-say"><b>가게마다 고를 수 있는 게 달라요</b>계산할 때 "환급은 어떻게 받아요?" 꼭 물어보세요. 업체 수수료가 빠지고 돌려받는 경우가 많아요.</p>
+        </div>
+      </section>
+
+      <div class="tf-pay">
+        <article>
+          <h3>카드로 샀을 때</h3>
+          <dl>
+            <div><dt>계산</dt><dd>세금 포함 금액이 카드로 결제돼요.</dd></div>
+            <div><dt>등록</dt><dd>보통 <b>결제한 그 카드</b>로 환급을 등록해요.</dd></div>
+            <div><dt>공항</dt><dd>세관 키오스크에서 GREEN 나오면 할 일 끝.</dd></div>
+            <div><dt>환급</dt><dd>업체가 나중에 카드로 돌려줘요. 며칠에서 몇 주 걸릴 수 있고, 환율 때문에 금액이 조금 다를 수 있어요.</dd></div>
+          </dl>
+        </article>
+        <article class="cash">
+          <h3>현금으로 샀을 때</h3>
+          <dl>
+            <div><dt>계산</dt><dd>세금 포함 금액을 현금으로 내요.</dd></div>
+            <div><dt>등록</dt><dd>카드를 등록하거나, 가게가 지원하면 <b>공항에서 현금 받기</b>를 골라요.</dd></div>
+            <div><dt>공항</dt><dd>키오스크 GREEN 받고 출국심사까지 마친 뒤 환급 카운터로 가요.</dd></div>
+            <div><dt>환급</dt><dd>엔화 현금으로 받아요. 수수료가 붙을 수 있어요.</dd></div>
+          </dl>
+        </article>
+      </div>
+
+      <section class="tf-sec air">
+        <h3>${ic("plane")}후쿠오카공항에서 <small>12/3 귀국날</small></h3>
+        <div class="tf-body">
+          <ol class="tf-steps">
+            <li><div><b>3층 출발로비, 짐 부치기 전에 세관 키오스크로</b><span>체크인 카운터 J~M 앞, D5·D6 출입구 쪽이에요. 산 물건은 전부 손에 들고 가세요.</span>
+              <div class="tf-map"><img src="img/tf-kiosk.jpg" alt="후쿠오카공항 국제선 3층 지도. 체크인 카운터 J에서 M 앞, D5와 D6 출입구 옆에 세관 키오스크가 있어요." loading="lazy">
+                <span class="tf-pin" style="left:52.2%;top:81.4%"></span><span class="tf-pin" style="left:64.9%;top:81.4%"></span>
+                <span class="tf-lb hot" style="left:58.5%;top:56%">세관 키오스크</span>
+                <span class="tf-lb" style="left:46%;top:24%">체크인 카운터 G~M</span>
+              </div>
+              <p class="tf-cap">후쿠오카공항 국제선 지도 (2026년 11월 1일 기준)</p></div></li>
+            <li><div><b>여권 스캔하고 결과 확인</b>
+              <div class="tf-gr"><div class="g"><b>GREEN</b>확인 끝. 바로 체크인하면 돼요.</div><div class="r"><b>RED</b>세관 직원에게 산 물건을 보여줘요.</div></div>
+              <span>키오스크 줄이 길면 Visit Japan Web으로도 할 수 있어요. 공항 면세 전용 와이파이에 연결해서 보안검색 전에 해요.</span></div></li>
+            <li><div><b>체크인하고 짐 부치기</b><span>키오스크 확인 전에 짐을 부치면 환급을 못 받아요.</span></div></li>
+            <li><div><b>보안검색, 출국심사</b><span>카드, 앱, 계좌로 받는 사람은 여기서 끝이에요.</span></div></li>
+            <li class="opt"><div><b>현금으로 받는 사람만: 환급 카운터</b><span>출국심사 지나서 왼쪽, 하카타 푸드홀 입구 옆에 환급 단말과 카운터가 있어요.</span>
+              <div class="tf-map"><img src="img/tf-refund.jpg" alt="후쿠오카공항 국제선 3층 출국심사 뒤 지도. 하카타 푸드홀 옆에 현금 환급 단말과 카운터가 있어요." loading="lazy">
+                <span class="tf-pin" style="left:38.4%;top:24.9%"></span>
+                <span class="tf-lb hot" style="left:38.4%;top:50%">현금 환급 카운터</span>
+                <span class="tf-lb" style="left:17%;top:9%">하카타 푸드홀</span>
+                <span class="tf-lb" style="left:82%;top:76%">출국심사</span>
+              </div></div></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="tf-sec warn">
+        <h3>${ic("check")}꼭 지킬 것</h3>
+        <div class="tf-body">
+          <ul class="tf-warn">
+            <li><span>산 물건을 <b>하나라도 쓰거나 먹으면</b> 그 영수증 전체를 못 돌려받아요. 화장품, 과자는 한국 가서 뜯어요.</span></li>
+            <li><span>면세품은 <b>기내 가방이나 손에</b> 들고 키오스크까지 가요.</span></li>
+            <li><span>12/3은 키오스크 줄을 생각해서 <b>평소보다 30분 일찍</b> 공항에 가요.</span></li>
+            <li><span>한국 입국 면세한도는 <b>1인 800달러</b>예요. 넘으면 한국 세관에 신고해요.</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <p class="note">2026년 11월 18일 기준, 일본 관광청 안내와 후쿠오카공항 국제선 지도로 정리했어요. 환급 방법과 수수료는 가게마다 달라요.</p>
+      <a class="home-btn" href="#">${ic("grid")}일정 보러 가기</a>
+    </div>`;
+}
+
 function render(scroll = true) {
   const id = location.hash.slice(1);
   const s = SPOTS.find(x => x.id === id);
   document.getElementById("app").innerHTML =
-    id === "weather" && EMBED_WEATHER ? weatherView() : id === "pack" ? pack() : id === "map" ? mapView() : id === "flight" ? flightView() : s ? detail(s) : home();
+    id === "weather" && EMBED_WEATHER ? weatherView() : id === "pack" ? pack() : id === "map" ? mapView() : id === "flight" ? flightView() : id === "taxfree" ? taxfreeView() : s ? detail(s) : home();
   if (scroll) window.scrollTo(0, 0);
   if (id === "map") initMap(); else { if (LMAP) { LMAP.remove(); LMAP = null; LME = null; } }
 }
