@@ -517,6 +517,24 @@ a.t-what svg { color: var(--teal); font-size: 16px; }
 :root[data-theme="dark"] .tf-cmp .c { color: #9cc4ff; } :root[data-theme="dark"] .tf-cmp .c.cash { color: #ffb870; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tf-cmp .c { color: #9cc4ff; } :root:not([data-theme="light"]) .tf-cmp .c.cash { color: #ffb870; } }
 .tf-say { margin-top: 12px !important; }
+.tf-map[data-tf-full] { cursor: zoom-in; }
+.tf-map[data-tf-full]::after { content: "크게 보기 ⤢"; position: absolute; right: 8px; bottom: 8px; font-size: 13px; font-weight: 800; color: #fff; background: rgba(13,36,33,.85); padding: 5px 10px; border-radius: 999px; }
+.tf-map[data-tf-full]:focus-visible { outline: 3px solid #1a73e8; outline-offset: 2px; }
+.tf-full { position: fixed; inset: 0; z-index: 1000; background: #0d2421; display: flex; flex-direction: column; }
+.tf-full-bar { flex: none; display: flex; align-items: center; gap: 10px; padding: calc(env(safe-area-inset-top, 0px) + 10px) 12px 10px 16px; color: #fff; }
+.tf-full-bar b { font-size: 17px; font-weight: 800; letter-spacing: -0.02em; }
+.tf-full-bar span { font-size: 13px; color: #b4ccc8; font-weight: 700; }
+.tf-z { margin-left: auto; flex: none; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 2px solid #fff; background: transparent; color: #fff; font: 800 14px var(--font); cursor: pointer; }
+.tf-x { flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #fff; color: #0d2421; font-size: 20px; font-weight: 800; cursor: pointer; }
+.tf-full-scroll { flex: 1; min-height: 0; overflow: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; display: flex; align-items: center; background: #fff; }
+.tf-full-in { position: relative; flex: none; height: min(calc(100dvh - 90px), 780px); aspect-ratio: 2220 / 780; }
+.tf-full-in.fit { height: auto; width: 100%; margin: auto 0; }
+.tf-full-in.fit .tf-lb { font-size: 10px; padding: 2px 5px; } .tf-full-in.fit .tf-lb.hot { font-size: 11px; } .tf-full-in.fit .tf-pin { width: 22px; height: 22px; border-width: 3px; }
+.tf-full-in img { display: block; width: 100%; height: 100%; }
+.tf-full-in .tf-lb { font-size: 15px; padding: 5px 10px; }
+.tf-full-in .tf-lb.hot { font-size: 17px; }
+.tf-full-in .tf-pin { width: 58px; height: 58px; }
+
 .tf-cap { margin-left: 0 !important; }
 
 .pack-btn .ico.fl-ico { background: #0f5f58; }
@@ -1820,7 +1838,7 @@ function taxfreeView() {
         <div class="tf-body">
           <ol class="tf-steps">
             ${step("3층 세관 키오스크로", "체크인 카운터 J~M 앞. 산 물건 전부 들고 가기", `
-              <div class="tf-map"><img src="img/tf-kiosk.jpg" alt="후쿠오카공항 국제선 3층 지도. 체크인 카운터 J에서 M 앞, D5와 D6 출입구 옆에 세관 키오스크가 있어요." loading="lazy">
+              <div class="tf-map" role="button" tabindex="0" data-tf-full="86" aria-label="3층 전체 지도 크게 보기"><img src="img/tf-kiosk.jpg" alt="후쿠오카공항 국제선 3층 지도. 체크인 카운터 J에서 M 앞, D5와 D6 출입구 옆에 세관 키오스크가 있어요." loading="lazy">
                 <span class="tf-pin" style="left:52.2%;top:81.4%"></span><span class="tf-pin" style="left:64.9%;top:81.4%"></span>
                 <span class="tf-lb hot" style="left:58.5%;top:56%">세관 키오스크</span>
                 <span class="tf-lb" style="left:46%;top:24%">체크인 카운터 G~M</span>
@@ -1829,14 +1847,14 @@ function taxfreeView() {
             ${step("체크인, 짐 부치기")}
             ${step("보안검색, 출국심사", "카드, 앱, 계좌로 받는 사람은 여기서 끝")}
             <li class="opt"><div><b>현금만: 환급 카운터</b><span>출국심사 지나 왼쪽, 하카타 푸드홀 옆</span>
-              <div class="tf-map"><img src="img/tf-refund.jpg" alt="후쿠오카공항 국제선 3층 출국심사 뒤 지도. 하카타 푸드홀 옆에 현금 환급 단말과 카운터가 있어요." loading="lazy">
+              <div class="tf-map" role="button" tabindex="0" data-tf-full="32" aria-label="3층 전체 지도 크게 보기"><img src="img/tf-refund.jpg" alt="후쿠오카공항 국제선 3층 출국심사 뒤 지도. 하카타 푸드홀 옆에 현금 환급 단말과 카운터가 있어요." loading="lazy">
                 <span class="tf-pin" style="left:38.4%;top:24.9%"></span>
                 <span class="tf-lb hot" style="left:38.4%;top:50%">현금 환급 카운터</span>
                 <span class="tf-lb" style="left:17%;top:9%">하카타 푸드홀</span>
                 <span class="tf-lb" style="left:82%;top:76%">출국심사</span>
               </div></div></li>
           </ol>
-          <p class="tf-cap">지도: 후쿠오카공항 국제선 공식 지도 (2026.11.1 기준)</p>
+          <p class="tf-cap">지도를 누르면 3층 전체 지도가 크게 열려요. 후쿠오카공항 국제선 공식 지도 (2026.11.1 기준)</p>
         </div>
       </section>
 
@@ -1853,8 +1871,49 @@ function taxfreeView() {
 
       <p class="note">2026년 11월 18일 기준, 일본 관광청 안내와 후쿠오카공항 지도로 정리했어요.</p>
       <a class="home-btn" href="#">${ic("grid")}일정 보러 가기</a>
+      <div class="tf-full" hidden role="dialog" aria-modal="true" aria-label="후쿠오카공항 국제선 3층 전체 지도">
+        <div class="tf-full-bar"><b>국제선 3층 전체 지도</b><button type="button" class="tf-z" data-tf-zoom aria-pressed="false">전체 보기</button><button type="button" class="tf-x" data-tf-close aria-label="닫기">✕</button></div>
+        <div class="tf-full-scroll"><div class="tf-full-in">
+          <img src="img/tf-3f.jpg" alt="후쿠오카공항 국제선 3층 전체 지도">
+          <span class="tf-pin" style="left:85.6%;top:91.7%"></span><span class="tf-pin" style="left:89.4%;top:91.7%"></span>
+          <span class="tf-pin" style="left:32.1%;top:54.1%"></span>
+          <span class="tf-lb hot" style="left:85%;top:80%">① 세관 키오스크</span>
+          <span class="tf-lb hot" style="left:32.1%;top:66%">⑤ 현금 환급 카운터</span>
+          <span class="tf-lb" style="left:73%;top:62%">체크인 카운터 A~M</span>
+          <span class="tf-lb" style="left:24%;top:43%">하카타 푸드홀</span>
+          <span class="tf-lb" style="left:47%;top:70%">출국심사</span>
+          <span class="tf-lb" style="left:55%;top:84%">보안검색</span>
+          <span class="tf-lb" style="left:41%;top:57%">면세점</span>
+          <span class="tf-lb" style="left:45%;top:13%">탑승구 50~57</span>
+        </div></div>
+      </div>
     </div>`;
 }
+
+function tfOpen(x) {
+  const box = document.querySelector(".tf-full"); if (!box) return;
+  box.hidden = false; document.body.style.overflow = "hidden";
+  const z = box.querySelector(".tf-z"); box.querySelector(".tf-full-in").classList.remove("fit"); z.textContent = "전체 보기"; z.setAttribute("aria-pressed", "false");
+  const sc = box.querySelector(".tf-full-scroll"), inn = box.querySelector(".tf-full-in");
+  requestAnimationFrame(() => { sc.scrollLeft = inn.offsetWidth * x / 100 - sc.clientWidth / 2; });
+  box.querySelector(".tf-x").focus();
+}
+function tfClose() {
+  const box = document.querySelector(".tf-full"); if (!box || box.hidden) return;
+  box.hidden = true; document.body.style.overflow = "";
+}
+document.addEventListener("click", e => {
+  const m = e.target.closest("[data-tf-full]"); if (m) return tfOpen(+m.dataset.tfFull);
+  if (e.target.closest("[data-tf-close]")) tfClose();
+  const z = e.target.closest("[data-tf-zoom]");
+  if (z) { const inn = document.querySelector(".tf-full-in"), fit = inn.classList.toggle("fit");
+    z.textContent = fit ? "크게 보기" : "전체 보기"; z.setAttribute("aria-pressed", fit); }
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") tfClose();
+  const m = e.target.closest && e.target.closest("[data-tf-full]");
+  if (m && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); tfOpen(+m.dataset.tfFull); }
+});
 
 function render(scroll = true) {
   const id = location.hash.slice(1);
@@ -1864,9 +1923,9 @@ function render(scroll = true) {
   if (scroll) window.scrollTo(0, 0);
   if (id === "map") initMap(); else { if (LMAP) { LMAP.remove(); LMAP = null; LME = null; } }
 }
-addEventListener("hashchange", () => render());
+addEventListener("hashchange", () => { document.body.style.overflow = ""; render(); });
 render();
-setInterval(() => { if (!["#weather", "#map"].includes(location.hash)) render(false); }, 60000); // 1분마다 시계와 영업 표시 갱신
+setInterval(() => { if (!["#weather", "#map", "#taxfree"].includes(location.hash)) render(false); }, 60000); // 1분마다 시계와 영업 표시 갱신
 </script>
 </body>
 </html>
