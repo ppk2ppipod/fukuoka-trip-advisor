@@ -441,6 +441,12 @@ a.t-what svg { color: var(--teal); font-size: 16px; }
 /* ---------- 항공편 ---------- */
 /* ---------- 면세절차 ---------- */
 .pack-btn .ico.tf-ico { background: #b4470e; }
+.pack-btn .ico.gr-ico { background: #2b7a3d; }
+.place.big { grid-template-columns: 1fr; }
+.place.big .thumb { aspect-ratio: 16 / 9; min-height: 0; }
+.place.big .what { font-size: 16px; line-height: 1.55; }
+.place.big .pick::before { content: "📍 "; }
+.d-title h2 { word-break: keep-all; }
 .tf-sum { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 16px; }
 .tf-sum > div { background: #12302d; color: #fff; border-radius: 16px; padding: 12px 10px; display: grid; gap: 4px; align-content: start; }
 .tf-sum b { font-family: var(--brand); font-size: 23px; white-space: nowrap; font-weight: 700; line-height: 1; color: #ffd23f; }
@@ -1085,6 +1091,7 @@ function home() {
       <nav class="board" aria-label="일정 꼭지">${tiles.join("")}</nav>
       ${flightButton()}
       ${mapButton()}
+      ${groceryButton()}
       ${taxfreeButton()}
       ${packButton()}
       <p class="note">영업 표시는 후쿠오카 현재 시각 기준이에요. 휴무일은 지도에서 한 번 더 확인하세요.</p>
@@ -1096,6 +1103,7 @@ function links(p) {
   if (p.map) out.push(`<a class="map" href="${p.map}" target="_blank" rel="noopener">${ic("pin")}지도 열기</a>`);
   if (p.find) out.push(`<a class="map" href="${findUrl(p.find)}" target="_blank" rel="noopener">${ic("pin")}지도에서 찾기</a>`);
   if (p.find2) out.push(`<a class="map" href="${findUrl(p.find2.q)}" target="_blank" rel="noopener">${ic("cup")}${p.find2.label}</a>`);
+  if (p.site) out.push(`<a class="map ghost" href="${p.site}" target="_blank" rel="noopener">${ic("link")}홈페이지</a>`);
   if (p.blog) out.push(`<a class="map ghost" href="${p.blog}" target="_blank" rel="noopener">${ic("book")}참고 블로그</a>`);
   if (p.line) out.push(`<a class="map line" href="${p.line}" target="_blank" rel="noopener">${ic("chat")}LINE 열기</a>`);
   return out.length ? `<div class="links">${out.join("")}</div>` : "";
@@ -1117,7 +1125,7 @@ function placeCard(p) {
         <span class="nm">${f.name}<small>${[f.desc, f.open ? `${f.open} ~ ${f.close}` : ""].filter(Boolean).join(", ")}</small></span>
         ${badge(f)}</li>`).join("")}</ul>` : "";
   return `
-    <article class="place"${p.key ? ` id="${p.anchor}-${p.key}"` : ""}>
+    <article class="place${p.big ? " big" : ""}"${p.key ? ` id="${p.anchor}-${p.key}"` : ""}>
       ${thumb}
       <div class="body">
         ${p.rows
@@ -1784,6 +1792,46 @@ function flightView() {
     </div>`;
 }
 
+// ---------- 그로서리 마켓 ----------
+const GROCERY = {
+  id: "grocery",
+  title: "그로서리 마켓",
+  sub: "맛있는 부엌을 위하여!!",
+  tagline: "고급 조미료, 지역 특산 식품, 식품 선물 쇼핑",
+  cover: "img/wataso.jpg",
+  sections: [
+    { title: "텐진 이와타야 본관 B1", icon: "jar", lede: "두 곳이 같은 층에 있어서 한 번에 둘러보기 좋아요.", places: [
+      { name: "키노쿠니야", kind: "Kinokuniya", icon: "jar", tone: "park", img: "img/kinokuniya.jpg",
+        what: "일본 탑티어 마트. 자체 브랜드 상품이 많고, 일반 슈퍼에서 잘 안 보이는 고급 조미료, 식품 선물, 프리미엄 가공식품을 팔아요.",
+        big: true, pick: "이와타야 본관 B1", open: "10:00", close: "20:00",
+        find: "紀ノ国屋 岩田屋本店", site: "https://www.e-kinokuniya.com/store/department/iwataya-honten" },
+      { name: "와타소", kind: "わた惣 福岡天神岩田屋店", icon: "pot", tone: "ramen", img: "img/wataso.jpg",
+        what: "150년 넘은 식품 셀렉트숍. 전국 각지의 맛있는 식품을 골라서 팔아요.",
+        big: true, pick: "이와타야 본관 B1", open: "10:00", close: "20:00",
+        find: "わた惣 岩田屋", site: "https://www.wataso.co.jp/" }
+    ] },
+    { title: "텐진 파르코 B1", icon: "cart", places: [
+      { name: "키타노에이스", kind: "北野エース", icon: "cart", tone: "shop", img: "img/kitanoace.jpg",
+        what: "일본 전국의 지역 특산 식품, 조미료, 레토르트 식품을 찾아보기 좋은 곳이에요.",
+        big: true, pick: "텐진 파르코 B1", open: "10:00", close: "20:00",
+        find: "北野エース 天神パルコ" }
+    ] }
+  ],
+  facts: [
+    { icon: "pin", k: "위치", v: "텐진 이와타야 본관, 파르코" },
+    { icon: "clock", k: "영업", v: "세 곳 모두 10:00 ~ 20:00" },
+    { icon: "star", k: "핵심", v: "고급 조미료, 지역 특산품" }
+  ]
+};
+
+function groceryButton() {
+  return `<a class="pack-btn" href="#grocery">
+      <span class="ico gr-ico">${ic("cart")}</span>
+      <span><b>그로서리 마켓</b><span class="sub">맛있는 부엌을 위하여!!</span></span>
+      <span class="go-ar">${ic("chev")}</span>
+    </a>`;
+}
+
 // 면세절차 (2026.11.1 리펀드 방식)
 function taxfreeButton() {
   return `<a class="pack-btn" href="#taxfree">
@@ -1919,7 +1967,7 @@ function render(scroll = true) {
   const id = location.hash.slice(1);
   const s = SPOTS.find(x => x.id === id);
   document.getElementById("app").innerHTML =
-    id === "weather" && EMBED_WEATHER ? weatherView() : id === "pack" ? pack() : id === "map" ? mapView() : id === "flight" ? flightView() : id === "taxfree" ? taxfreeView() : s ? detail(s) : home();
+    id === "weather" && EMBED_WEATHER ? weatherView() : id === "pack" ? pack() : id === "map" ? mapView() : id === "flight" ? flightView() : id === "taxfree" ? taxfreeView() : id === "grocery" ? detail(GROCERY) : s ? detail(s) : home();
   if (scroll) window.scrollTo(0, 0);
   if (id === "map") initMap(); else { if (LMAP) { LMAP.remove(); LMAP = null; LME = null; } }
 }
