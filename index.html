@@ -751,7 +751,11 @@ const SPOTS = [
           { name: "스시사카바 사시스", kind: "원 후쿠오카 빌딩점", icon: "fork", tone: "ramen", img: "img/sashisu.jpg",
             what: "스시와 술을 가볍게 즐기는 스시 주점. 후쿠오카원(ONE FUKUOKA BLDG.) 안",
             tip: "영업시간과 층은 공식 인스타그램 <b>@sashisu_tenjin</b>에서 확인하세요",
-            find: "寿司酒場 さしす ONE FUKUOKA BLDG" }
+            find: "寿司酒場 さしす ONE FUKUOKA BLDG" },
+          { name: "코메다커피", kind: "카페", icon: "cup", tone: "dish", img: "img/komeda.jpg",
+            what: "후쿠오카 텐진미나미점(福岡天神南店). 아침 일찍 여는 나고야식 카페, 컴포트인 후쿠오카 텐진 1층, 연중무휴", open: "07:00", close: "23:00",
+            tip: "아침 11시까지 음료를 시키면 <b>모닝 토스트</b>가 무료로 나와요",
+            find: "コメダ珈琲店 福岡天神南店" }
         ],
         minis: [
           { name: "이나바초잇케이", icon: "bowl", tone: "ramen", img: "img/inaba.jpg", desc: "참돔 오차즈케", find: "이나바초잇케이 텐진" },
@@ -1398,6 +1402,7 @@ const PLACES = [
   ["one", "후쿠오카원", "tenjin", 33.59079, 130.39984],
   ["sashisu", "스시사카바 사시스", "tenjin", 33.59072, 130.39992],
   ["kamameshi", "카마메시", "tenjin", 33.59027, 130.39701],
+  ["komeda", "코메다커피", "tenjin", 33.58922, 130.40361],
   ["inaba", "이나바초잇케이", "tenjin", 33.58990, 130.39800, true],
   ["horumon", "텐진호루몽", "tenjin", 33.58920, 130.40060, true],
   ["kiwamiya", "키와미야", "tenjin", 33.59050, 130.39880, true],
@@ -1422,7 +1427,7 @@ const PLACES = [
 // 위치가 대략인 곳은 구글맵에서 이름으로 찾기
 const GQ = { bic: "ビックカメラ 天神2号館", inaba: "이나바초잇케이 텐진", horumon: "天神ホルモン 天神", kiwamiya: "極味や 福岡パルコ店",
   hamburg: "福岡ハンバーグ 天神", deandeluca: "DEAN & DELUCA 博多", obon: "おぼんdeごはん 博多", sanyo: "산요쇼쿠도 하카타 지하상가",
-  akari: "とんかつ 光 薬院", nonetoosoon: "NONE TOO SOON 薬院", hightide: "HIGHTIDE STORE FUKUOKA" };
+  akari: "とんかつ 光 薬院", komeda: "コメダ珈琲店 福岡天神南店",nonetoosoon: "NONE TOO SOON 薬院", hightide: "HIGHTIDE STORE FUKUOKA" };
 const gmapUrl = (p, mode) => "https://www.google.com/maps/dir/?api=1&destination=" +
   encodeURIComponent(GQ[p.id] || `${p.ll[0]},${p.ll[1]}`) + "&travelmode=" + (mode === "transit" ? "transit" : "walking");
 
@@ -1974,6 +1979,22 @@ function render(scroll = true) {
 addEventListener("hashchange", () => { document.body.style.overflow = ""; render(); });
 render();
 setInterval(() => { if (!["#weather", "#map", "#taxfree"].includes(location.hash)) render(false); }, 60000); // 1분마다 시계와 영업 표시 갱신
+
+// 홈 화면 바로가기는 다시 열어도 예전 화면을 그대로 띄워서, 열 때마다 새 버전이 있는지 한 번 보고 있으면 새로 불러온다.
+// BUILD 값은 tools/build.sh가 공개 사이트용 파일에만 채운다.
+const BUILD = "20261126151259";
+let lastCheck = 0;
+async function checkUpdate() {
+  if (BUILD.startsWith("__") || Date.now() - lastCheck < 30000) return;
+  lastCheck = Date.now();
+  try {
+    const r = await fetch(location.pathname + "?u=" + Date.now(), { cache: "no-store" });
+    const m = (await r.text()).match(/const BUILD = "([^"]+)"/);
+    if (m && m[1] !== BUILD) location.reload();
+  } catch (e) { /* 오프라인이면 그냥 지금 화면 유지 */ }
+}
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") checkUpdate(); });
+addEventListener("pageshow", checkUpdate);
 </script>
 </body>
 </html>
