@@ -442,6 +442,35 @@ a.t-what svg { color: var(--teal); font-size: 16px; }
 /* ---------- 면세절차 ---------- */
 .pack-btn .ico.tf-ico { background: #b4470e; }
 .pack-btn .ico.gr-ico { background: #2b7a3d; }
+/* ---------- 비상시 대처사항 ---------- */
+.pack-btn .ico.sos-ico { background: #c62828; }
+.sos-big { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 4px; }
+.sos-big a { display: grid; gap: 2px; text-decoration: none; background: #c62828; color: #fff; border-radius: 20px; padding: 14px 16px; box-shadow: 0 8px 20px rgba(198,40,40,.28); }
+.sos-big a + a { background: #a63a00; box-shadow: 0 8px 20px rgba(166,58,0,.28); }
+.sos-big b { font-family: var(--brand); font-size: 40px; font-weight: 700; line-height: 1; }
+.sos-big span { font-size: 14px; font-weight: 700; line-height: 1.4; }
+.tf-sec.sos-msg { --k: #1a5fb4; }
+.tf-sec.sos-hot { --k: #2b7a3d; }
+.sos-rule { margin: 0 0 12px; padding: 12px 14px; border-radius: 14px; background: #fff3cf; color: #4a3300; border: 2px solid #f0c75e; font-size: 15px; line-height: 1.5; }
+.sos-rule b { display: block; font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
+.sos-go { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 54px; margin-bottom: 14px; border-radius: 16px;
+  background: #1a5fb4; color: #fff; text-decoration: none; font-size: 18px; font-weight: 800; box-shadow: 0 6px 16px rgba(26,95,180,.3); }
+.sos-calls { display: grid; gap: 8px; }
+.sos-call { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: center; text-decoration: none; color: var(--ink);
+  background: var(--bg); border-radius: 16px; padding: 10px 12px; }
+.sos-ph { width: 44px; height: 44px; border-radius: 50%; background: var(--k); color: #fff; display: grid; place-items: center; font-size: 21px; }
+.sos-call small { display: block; font-size: 13px; font-weight: 700; color: var(--ink-soft); }
+.sos-call b { display: block; font-family: var(--brand); font-size: 22px; font-weight: 700; letter-spacing: .01em; font-variant-numeric: tabular-nums; color: var(--k); }
+.sos-cc { display: inline-block; margin: 3px 0 1px; font-size: 12px; font-weight: 800; padding: 2px 8px; border-radius: 999px; }
+.sos-cc.jp { background: #fde2e0; color: #8a1b14; }
+.sos-cc.kr { background: #dbe7fb; color: #133f7a; }
+.sos-call em { display: block; font-style: normal; font-size: 13px; color: var(--ink-soft); }
+.sos-addr { display: grid; grid-template-columns: 18px 1fr; gap: 6px; margin: 12px 0 10px; font-size: 15px; font-weight: 700; }
+.sos-addr svg { color: var(--k); margin-top: 3px; }
+.sos-addr span { grid-column: 2; font-weight: 400; font-size: 14px; color: var(--ink-soft); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .sos-rule { background: #3a2d0a; color: #ffe08a; border-color: #8a6a1a; } :root:not([data-theme="light"]) .sos-call b { color: #fff; } }
+:root[data-theme="dark"] .sos-rule { background: #3a2d0a; color: #ffe08a; border-color: #8a6a1a; }
+:root[data-theme="dark"] .sos-call b { color: #fff; }
 .place.big { grid-template-columns: 1fr; }
 .place.big .thumb { aspect-ratio: 16 / 9; min-height: 0; }
 .place.big .what { font-size: 16px; line-height: 1.55; }
@@ -653,6 +682,9 @@ a.t-what svg { color: var(--teal); font-size: 16px; }
   <symbol id="walk" viewBox="0 0 24 24"><circle cx="13.5" cy="4" r="2"/><path d="m9 21 2.5-6.5L14 17v4M7.5 12.5 10 8.5l3.5 1 2 3.5 2.5 1M11 9l-1 5.5"/></symbol>
   <symbol id="target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></symbol>
   <symbol id="umbrella" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 18 0Z"/><path d="M12 12v7a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="sos" viewBox="0 0 24 24"><path d="M12 3 2.5 20h19Z"/><path d="M12 9.5v4.5M12 17.2v.3"/></symbol>
+  <symbol id="phone" viewBox="0 0 24 24"><path d="M5 3.5h3.5l1.8 4.5-2.3 1.4a11 11 0 0 0 6.6 6.6l1.4-2.3 4.5 1.8V19a2 2 0 0 1-2 2A16.5 16.5 0 0 1 3 5.5a2 2 0 0 1 2-2Z"/></symbol>
+  <symbol id="msg" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4Z"/><path d="M8 9.5h8M8 12.5h5"/></symbol>
 </svg>
 
 <main class="app" id="app"></main>
@@ -1098,6 +1130,7 @@ function home() {
       ${groceryButton()}
       ${taxfreeButton()}
       ${packButton()}
+      ${sosButton()}
       <p class="note">영업 표시는 후쿠오카 현재 시각 기준이에요. 휴무일은 지도에서 한 번 더 확인하세요.</p>
     </section>`;
 }
@@ -1846,6 +1879,90 @@ function taxfreeButton() {
     </a>`;
 }
 
+// 비상시 대처사항. 전화번호는 공식 누리집 기준(2026.11.27 확인), 개인 폰번호는 공개 페이지라 넣지 않는다.
+function sosButton() {
+  return `<a class="pack-btn" href="#sos">
+      <span class="ico sos-ico">${ic("sos")}</span>
+      <span><b>비상시 대처사항</b><span class="sub">재해용 전언판, 총영사관, 여권 분실</span></span>
+      <span class="go-ar">${ic("chev")}</span>
+    </a>`;
+}
+
+function sosView() {
+  // 번호마다 어느 나라 번호인지 붙인다 (일본 번호는 지금 폰으로 그대로 눌러도 걸려요)
+  const call = (tel, num, who, note = "") => `
+    <a class="sos-call" href="tel:${tel}">
+      <span class="sos-ph">${ic("phone")}</span>
+      <span><small>${who}</small><b>${num}</b>
+        <span class="sos-cc ${tel.startsWith("+82") ? "kr" : "jp"}">${tel.startsWith("+82") ? "한국 번호" : "일본 번호"}</span>${note ? `<em>${note}</em>` : ""}</span>
+    </a>`;
+  const step = (t, s = "") => `<li><div><b>${t}</b>${s ? `<span>${s}</span>` : ""}</div></li>`;
+  return `
+    <div class="gutter">
+      <div class="p-head"><a class="back" href="#">${ic("back")}목록</a><span class="pill-brand">Fukuoka Trip Advisor</span></div>
+      <h2 class="p-title">비상시 대처사항</h2>
+      <p class="p-lede">당황하지 말고 위에서부터 차례로. 번호를 누르면 바로 전화가 걸려요. 한국 폰 그대로 눌러도 돼요.</p>
+
+      <div class="sos-big">
+        <a href="tel:110"><b>110</b><span>경찰<br>도난, 사건사고</span></a>
+        <a href="tel:119"><b>119</b><span>구급차, 화재<br>구급차는 무료</span></a>
+      </div>
+
+      <section class="tf-sec sos-msg">
+        <h3>${ic("msg")}재해용 전언판 <small>web171</small></h3>
+        <div class="tf-body">
+          <p>지진이나 태풍으로 전화가 안 될 때, 인터넷에 안부를 남기고 서로 확인하는 NTT 게시판이에요.</p>
+          <div class="sos-rule"><b>전화번호는 나봉이 폰번호로 통일</b>남길 때도, 확인할 때도 둘 다 나봉이 번호를 넣어요.</div>
+          <a class="sos-go" href="https://www.web171.jp/web171app/topRedirect/" target="_blank" rel="noopener">${ic("link")}재해용 전언판 열기</a>
+          <ol class="tf-steps">
+            ${step("전언판 열고 나봉이 폰번호 입력", "숫자만, 하이픈(-) 없이")}
+            ${step("남기기: 「登録」", "이름(히라가나), 무사한지 고르고, 100자 안으로 어디 있는지")}
+            ${step("확인하기: 「確認」", "같은 번호로 상대가 남긴 글 보기")}
+          </ol>
+          <p class="tf-cap">재해가 났을 때만 열려요. 매월 1일과 15일은 연습으로 써볼 수 있어서, 여행 첫날 12/1에 한 번 해봐도 좋아요.</p>
+        </div>
+      </section>
+
+      <section class="tf-sec">
+        <h3>${ic("building")}주후쿠오카 총영사관</h3>
+        <div class="tf-body">
+          <div class="sos-calls">
+            ${call("+81927710461", "+81-92-771-0461", "대표 (평일 근무시간)", "여권, 영사 민원")}
+            ${call("+818085882806", "+81-80-8588-2806", "긴급 (밤, 휴일)", "사건사고")}
+            ${call("+82232100404", "+82-2-3210-0404", "영사안전콜센터 (서울, 24시간)", "유료. 무료 전화앱도 있어요")}
+          </div>
+          <p class="sos-addr">${ic("pin")}福岡市中央区地行浜 1-1-3<br><span>지하철 공항선 도진마치(唐人町)역 1번 출구에서 걸어서 약 10분. 택시가 편해요.</span></p>
+          <a class="map" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("駐福岡大韓民国総領事館")}" target="_blank" rel="noopener">${ic("pin")}구글맵에서 보기</a>
+        </div>
+      </section>
+
+      <section class="tf-sec sos-hot">
+        <h3>${ic("chat")}한국어 도움 전화</h3>
+        <div class="tf-body">
+          <div class="sos-calls">
+            ${call("+815038162787", "+81-50-3816-2787", "일본정부관광국 Japan Visitor Hotline (24시간)", "한국어 가능. 병원 찾기, 사고, 재해 안내")}
+          </div>
+        </div>
+      </section>
+
+      <section class="tf-sec warn">
+        <h3>${ic("passport")}여권을 잃어버렸을 때</h3>
+        <div class="tf-body">
+          <ol class="tf-steps">
+            ${step("가까운 파출소(交番)에 분실 신고", "분실 신고 접수증(受理番号)을 꼭 받아요")}
+            ${step("총영사관에 전화", "평일 낮엔 대표번호, 밤이나 휴일엔 긴급번호")}
+            ${step("총영사관 방문", "접수증, 신분증(없으면 사본), 여권 사진 2장 챙기기. 긴급여권은 보통 영사관 근무일에 바로 나와요")}
+            ${step("항공사에 알리기", "귀국편 이름과 여권번호 바뀌는 것 말해두기")}
+          </ol>
+          <p class="tf-say"><b>미리 해두기</b>여권 사진면을 폰으로 찍어 두면 다시 만들 때 훨씬 빨라요.</p>
+        </div>
+      </section>
+
+      <p class="note">총영사관 번호는 외교부 누리집, 도움 전화는 일본정부관광국(JNTO), 전언판은 NTT 안내 기준이에요 (2026.11.27 확인).</p>
+      <a class="home-btn" href="#">${ic("grid")}일정 보러 가기</a>
+    </div>`;
+}
+
 function taxfreeView() {
   const step = (t, s = "", extra = "") => `<li><div><b>${t}</b>${s ? `<span>${s}</span>` : ""}${extra}</div></li>`;
   const row = (k, a, b) => `<div class="k">${k}</div><div class="c">${a}</div><div class="c cash">${b}</div>`;
@@ -1972,7 +2089,7 @@ function render(scroll = true) {
   const id = location.hash.slice(1);
   const s = SPOTS.find(x => x.id === id);
   document.getElementById("app").innerHTML =
-    id === "weather" && EMBED_WEATHER ? weatherView() : id === "pack" ? pack() : id === "map" ? mapView() : id === "flight" ? flightView() : id === "taxfree" ? taxfreeView() : id === "grocery" ? detail(GROCERY) : s ? detail(s) : home();
+    id === "weather" && EMBED_WEATHER ? weatherView() : id === "pack" ? pack() : id === "map" ? mapView() : id === "flight" ? flightView() : id === "taxfree" ? taxfreeView() : id === "sos" ? sosView() : id === "grocery" ? detail(GROCERY) : s ? detail(s) : home();
   if (scroll) window.scrollTo(0, 0);
   if (id === "map") initMap(); else { if (LMAP) { LMAP.remove(); LMAP = null; LME = null; } }
 }
@@ -1982,7 +2099,7 @@ setInterval(() => { if (!["#weather", "#map", "#taxfree"].includes(location.hash
 
 // 홈 화면 바로가기는 다시 열어도 예전 화면을 그대로 띄워서, 열 때마다 새 버전이 있는지 한 번 보고 있으면 새로 불러온다.
 // BUILD 값은 tools/build.sh가 공개 사이트용 파일에만 채운다.
-const BUILD = "20261126151259";
+const BUILD = "20261127162651";
 let lastCheck = 0;
 async function checkUpdate() {
   if (BUILD.startsWith("__") || Date.now() - lastCheck < 30000) return;
