@@ -1914,12 +1914,7 @@ function sosView() {
           <p>지진이나 태풍으로 전화가 안 될 때, 인터넷에 안부를 남기고 서로 확인하는 NTT 게시판이에요.</p>
           <div class="sos-rule"><b>전화번호는 나봉이 폰번호로 통일</b>남길 때도, 확인할 때도 둘 다 나봉이 번호를 넣어요.</div>
           <a class="sos-go" href="https://www.web171.jp/web171app/topRedirect/" target="_blank" rel="noopener">${ic("link")}재해용 전언판 열기</a>
-          <ol class="tf-steps">
-            ${step("전언판 열고 나봉이 폰번호 입력", "숫자만, 하이픈(-) 없이")}
-            ${step("남기기: 「登録」", "이름(히라가나), 무사한지 고르고, 100자 안으로 어디 있는지")}
-            ${step("확인하기: 「確認」", "같은 번호로 상대가 남긴 글 보기")}
-          </ol>
-          <p class="tf-cap">재해가 났을 때만 열려요. 매월 1일과 15일은 연습으로 써볼 수 있어서, 여행 첫날 12/1에 한 번 해봐도 좋아요.</p>
+          <p class="tf-cap">열면 맨 위에서 한국어로 바꿀 수 있어요. 나봉이 폰번호는 숫자만, 하이픈(-) 없이 넣어요.</p>
         </div>
       </section>
 
@@ -2099,7 +2094,7 @@ setInterval(() => { if (!["#weather", "#map", "#taxfree"].includes(location.hash
 
 // 홈 화면 바로가기는 다시 열어도 예전 화면을 그대로 띄워서, 열 때마다 새 버전이 있는지 한 번 보고 있으면 새로 불러온다.
 // BUILD 값은 tools/build.sh가 공개 사이트용 파일에만 채운다.
-const BUILD = "20261127162651";
+const BUILD = "20261127193817";
 let lastCheck = 0;
 async function checkUpdate() {
   if (BUILD.startsWith("__") || Date.now() - lastCheck < 30000) return;
