@@ -575,6 +575,8 @@ a.t-what svg { color: var(--teal); font-size: 16px; }
 .pack-btn .ico.fl-ico { background: #0f5f58; }
 .pack-btn .ico.fl-ico svg { fill: #fff; stroke: none; }
 .fl-cards { display: grid; gap: 14px; margin-top: 4px; }
+.fl-who { display: flex; align-items: center; gap: 8px; margin: 18px 0 8px; font-size: 17px; font-weight: 800; letter-spacing: -0.02em; }
+.fl-who .who { font-size: 15px; padding: 3px 12px; }
 .fl-card { background: var(--surface); border-radius: 22px; box-shadow: var(--shadow); overflow: hidden; --k: #136a62; }
 .fl-card.fl-back { --k: #5b3fc4; }
 .fl-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 8px; padding: 12px 16px; background: var(--k); color: #fff; }
@@ -1757,14 +1759,28 @@ const FLIGHTS = [
       ["수속 시간", "<b>10:00 ~ 11:00</b><br><span>출발 2시간 전부터 1시간 전까지 (이스타항공 안내)</span>"],
       ["짐 찾는 곳", "<b>김해공항 국제선 1층 수하물 수취대</b><br><span>번호는 당일 배정돼요. 수취대 위 모니터에서 <b>ZE942</b>를 찾으세요.</span>"]
     ],
+    links: [["https://www.fukuoka-airport.jp/ko/flight/", "후쿠오카공항 오늘의 운항"]] },
+  { who: "수봉", kind: "출국", tone: "out", code: "TW205", air: "트리니티항공", date: "2026년 12월 1일 (화)",
+    from: ["ICN", "인천"], to: ["FUK", "후쿠오카"], dep: "14:45", arr: "16:20", dur: "1시간 35분",
+    notes: [
+      ["체크인 카운터", "<b>인천공항 제1여객터미널(T1) 3층 B 카운터</b><br><span>트리니티항공(옛 티웨이항공) 공식 안내 기준이에요. 2터미널이 아니에요.</span>"],
+      ["짐 찾는 곳", "<b>후쿠오카공항 국제선 1층 수하물 수취대</b><br><span>번호는 당일 배정돼요. 입국심사 끝나고 수취대 위 모니터에서 <b>TW205</b>를 찾으세요.</span>"]
+    ],
+    links: [["https://www.airport.kr/ap_ko/index.do", "인천공항 안내"], ["https://www.fukuoka-airport.jp/ko/flight/", "후쿠오카공항 오늘의 운항"]] },
+  { who: "수봉", kind: "귀국", tone: "back", code: "TW204", air: "트리니티항공", date: "2026년 12월 3일 (목)",
+    from: ["FUK", "후쿠오카"], to: ["ICN", "인천"], dep: "12:45", arr: "14:20", dur: "1시간 35분",
+    notes: [
+      ["체크인 카운터", "<b>후쿠오카공항 국제선 3층</b><br><span>카운터 알파벳은 날마다 바뀌어요. 당일 3층 출발 모니터에서 <b>TW204</b>를 찾으세요.</span>"],
+      ["짐 찾는 곳", "<b>인천공항 제1여객터미널 1층 수하물 수취대</b><br><span>수취대 위 모니터에서 <b>TW204</b>를 찾으세요.</span>"]
+    ],
     links: [["https://www.fukuoka-airport.jp/ko/flight/", "후쿠오카공항 오늘의 운항"]] }
-];
+].map(f => ({ who: "나봉", ...f }));
 const hhmm = t => +t.slice(0, 2) * 60 + +t.slice(3);
 
 function flightButton() {
   return `<a class="pack-btn" href="#flight">
       <span class="ico fl-ico">${ic("plane")}</span>
-      <span><b>항공편</b><span class="sub">LJ513 부산 → 후쿠오카, ZE942 귀국</span></span>
+      <span><b>항공편</b><span class="sub">나봉 LJ513, ZE942 · 수봉 TW205, TW204</span></span>
       <span class="go-ar">${ic("chev")}</span>
     </a>`;
 }
@@ -1775,7 +1791,7 @@ const dueTime = t => { const m = hhmm(t) - 120; return `${String(Math.floor(m / 
 function flightCard(f) {
   return `
     <article class="fl-card fl-${f.tone}">
-      <div class="fl-top"><span class="fl-kind">${f.kind}</span><span class="fl-due">${ic("clock")}${dueTime(f.dep)}까지 공항 도착 요망</span><span class="fl-date">${f.date}</span></div>
+      <div class="fl-top"><span class="fl-kind">${f.who} ${f.kind}</span><span class="fl-due">${ic("clock")}${dueTime(f.dep)}까지 공항 도착 요망</span><span class="fl-date">${f.date}</span></div>
       <div class="fl-route">
         <div><b>${f.from[0]}</b><span>${f.from[1]}</span><time>${f.dep}</time></div>
         <div class="fl-mid"><span class="fl-line">${ic("plane")}</span><small>${f.dur}</small></div>
@@ -1822,9 +1838,11 @@ function flightView() {
     <div class="gutter">
       <div class="p-head"><a class="back" href="#">${ic("back")}목록</a><span class="pill-brand">Fukuoka Trip Advisor</span></div>
       <h2 class="p-title">항공편</h2>
-      <p class="p-lede">나봉수봉 비행기 시간과 체크인 카운터, 짐 찾는 곳이에요.</p>
-      <div class="fl-cards">${FLIGHTS.map(flightCard).join("")}</div>
-      ${rushBlock(FUK.arr, "LJ513", "12월 1일 후쿠오카공항 도착 혼잡도", "LJ513이 내리는 15:55 전후로 다른 나라에서 들어오는 국제선이에요. 많을수록 입국심사 줄이 길어져요.", "도착")}
+      <p class="p-lede">나봉, 수봉 비행기 시간과 체크인 카운터, 짐 찾는 곳이에요.</p>
+      ${["나봉", "수봉"].map(w => `
+        <h3 class="fl-who"><span class="who ${w === "나봉" ? "tone-shop" : "tone-dish"}">${w}</span>${w === "나봉" ? "부산 김해 출발" : "인천 출발"}</h3>
+        <div class="fl-cards">${FLIGHTS.filter(f => f.who === w).map(flightCard).join("")}</div>`).join("")}
+      ${rushBlock(FUK.arr, "LJ513", "12월 1일 후쿠오카공항 도착 혼잡도", "나봉 LJ513이 15:55, 수봉 TW205가 16:20에 내려요. 그 전후로 다른 나라에서 들어오는 국제선이에요. 많을수록 입국심사 줄이 길어져요.", "도착")}
       <p class="note">혼잡도는 후쿠오카공항 공식 운항표 기준이에요. 12월 운항표가 아직 안 나와서 같은 요일인 11월 24일(화) 도착편으로 셌어요. 지연이나 결항은 반영되지 않아요.</p>
       <a class="home-btn" href="#">${ic("grid")}일정 보러 가기</a>
     </div>`;
@@ -2094,7 +2112,7 @@ setInterval(() => { if (!["#weather", "#map", "#taxfree"].includes(location.hash
 
 // 홈 화면 바로가기는 다시 열어도 예전 화면을 그대로 띄워서, 열 때마다 새 버전이 있는지 한 번 보고 있으면 새로 불러온다.
 // BUILD 값은 tools/build.sh가 공개 사이트용 파일에만 채운다.
-const BUILD = "20261127193817";
+const BUILD = "20261128134927";
 let lastCheck = 0;
 async function checkUpdate() {
   if (BUILD.startsWith("__") || Date.now() - lastCheck < 30000) return;
